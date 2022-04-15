@@ -15,14 +15,14 @@ var viewHighscores = function(event){
 var gameTimer = function(){
     var gameTimer = document.querySelector("#game-timer");
     var timer = setInterval(function(){
+        countDown--;
+        gameTimer.innerHTML = "Timer:" + countDown;
         if(countDown === 0){
             clearInterval(timer);
             endGame();   
         }else if(questionCount > questionTotal){
             clearInterval(timer);
         };
-        countDown--;
-        gameTimer.innerHTML = "Timer:" + countDown;
     }, 1000);
 }
 
@@ -54,6 +54,8 @@ var submitAnswer = function(event){
     var targetEl = event.target;
 
    if(targetEl.matches(".btn")){
+
+    
     quizQuestionEl.style.display = "none";
     questionCount++;
     playGame();

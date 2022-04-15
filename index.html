@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="./Assets/CSS/style.css"> 
     <title>Chris's Code Quiz</title>
 </head>
-<body class = "play-area">
-    <header class = "nav-time">
+<body class = "play-area" id="play-area">
+    <header class = "nav-time" id="nav-time">
         <nav>View Highscores</nav>
-        <div>Timer:</div>
+        <div id =game-timer>Timer:30</div>
     </header>
-    <div class = "intro-wrapper">
+
+    <div class = "intro-wrapper" id="intro-wrapper">
         <section class = "quiz-intro">
             <h1>Coding Quiz Challenge</h1>
             <p> 
@@ -22,6 +23,52 @@
             <button class = "btn start-button" id = "start-button">Start quiz</button>
         </section>
     </div>
+
+    <section class = "quiz-area" id = "quiz-area">
+        <article class = "question" id = "question1" dataQuestion = "1">
+            <h1>1.Commonly used datatypes do NOT include:</h1>
+            <button class ="btn" data-correct = "false">1. Strings</button>
+            <button class ="btn" data-correct = "false">2. Booleans</button>
+            <button class ="btn" data-correct = "true">3. Alerts</button>
+            <button class ="btn" data-correct = "false">4. Numbers</button>
+        </article>
+
+        <article class = "question" id = "question2" dataQuestion = "2">
+            <h1>2. The condition in an if/else statement is enclosed with ___</h1>
+            <button class ="btn" data-correct = "false">1. quotes </button>
+            <button class ="btn" data-correct = "false">2. curly brackets</button>
+            <button class ="btn" data-correct = "true">3. parenthesis</button>
+            <button class ="btn" data-correct = "false">4. square brackets</button>
+        </article>
+
+        <article class = "question" id = "question3" dataQuestion = "3">
+            <h1>3.Arrays in javascript can be used to store ____.</h1>
+            <button class ="btn" data-correct = "false">1.numbers and strings</button>
+            <button class ="btn" data-correct = "true">2. other arrays</button>
+            <button class ="btn" data-correct = "false">3. booleans </button>
+            <button class ="btn" data-correct = "true">4. All of the above</button>
+        </article>
+
+        <article class = "question" id = "question4" dataQuestion = "4">
+            <h1>4. Strings must be enclosed with ___ when being assigned to variables.</h1>
+            <button class ="btn" data-correct = "false">1. commas </button>
+            <button class ="btn" data-correct = "false">2. curly brackets</button>
+            <button class ="btn" data-correct = "true">3. quotes</button>
+            <button class ="btn" data-correct = "false">4. parenthesis</button>
+        </article>
+
+        <article class = "question" id = "question5" dataQuestion = "5">
+            <h1>5. A very useful debugging tool durring development and debugging for printing to the developer console is:</h1>
+            <button class ="btn" data-correct = "true">1. console.log</button>
+            <button class ="btn" data-correct = "false">2. javascript</button>
+            <button class ="btn" data-correct = "false">3. terminal/bash</button>
+            <button class ="btn" data-correct = "false">4. for loops</button>
+        </article>
+    </section>
     <script src="./assets/js/script.js"></script>
-    </body>
+    <div class = "answer-feedback" id = "answer-feedback">
+        <p>Correct!</p>
+    </div>
+        
+</body>
     </html>
