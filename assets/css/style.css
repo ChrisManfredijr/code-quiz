@@ -79,7 +79,7 @@
 .quiz-area {
     display:flex;
     justify-content: center;
-    height: 600px;
+    height: 700px;
     align-items: flex-start;
     margin-bottom:30px;
     display:none;
@@ -113,4 +113,39 @@
     align-self:center;
     margin-left:33%;
     display:none;
+}
+
+/*end screen*/
+.end-screen{
+    display:none;
+    justify-content:center;
+    align-items: flex-start;
+    flex-direction:column;
+    height:600px;
+    width:50%;
+    margin:0 auto;
+
+}
+
+.end-screen h1{
+    font-size:60px;
+    color:var(--color2);
+    margin-bottom:10px;
+}
+.end-screen p{
+    font-size:30px;
+    margin-bottom:10px;
+}
+.submit-container label{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.intials{
+    height:30px;
+}
+
+.sub{
+    height:30px;
+    width:100px;
 }

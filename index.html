@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Assets/CSS/style.css"> 
+    <link rel="stylesheet" href="./assets/css/style.css"> 
     <title>Chris's Code Quiz</title>
 </head>
 <body class = "play-area" id="play-area">
@@ -65,10 +65,18 @@
             <button class ="btn" data-correct = "false">4. for loops</button>
         </article>
     </section>
-    <script src="./assets/js/script.js"></script>
+    <section class = "end-screen" id = "end-screen">
+        <h1>All done!</h1>
+        <p>your final score is:</p>
+        <form class = submit-container id = "submit-container">
+            <label for = "intials">Enter intials:</label>
+            <input type="text" id="intials" name="intials" class="intials">
+            <input type="submit" value = "Submit" id="sub-button" class="btn sub">
+        </form>
+    </section>
     <div class = "answer-feedback" id = "answer-feedback">
-        <p>Correct!</p>
+        <p></p>
     </div>
-        
+    <script src="./assets/js/script.js"></script>
 </body>
     </html>
