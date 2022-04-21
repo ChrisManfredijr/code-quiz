@@ -9,14 +9,16 @@ var answerFeedbackEl = document.querySelector("#answer-feedback");
 var endGameEl = document.querySelector("#end-screen");
 var endMessageEl = document.querySelector("#end-message");
 var highScoresEl = document.querySelector("#high-scores");
-var podiumEl = document.querySelector("#podium");
+var podiumEl = document.querySelector("#podium"); 
+var goBackEl = document.querySelector("#go-back");
+var clearScoreEl = document.querySelector("#clear-score");
 var highscoreToggle = 0;
 var scoreRanking = [];
 
 
 
 var viewHighscores = function(event){
-   console.log("test-fire");
+
    if(event.target.matches(".view-score")|| event.target.matches(".sub")){
         //if the user tries to view highscores durring game, this will ensure the timer stops and does not go to endscreen
         highscoreToggle++;
@@ -24,18 +26,15 @@ var viewHighscores = function(event){
         highScoresEl.style.display = "flex";
 
         var localArray = JSON.parse(localStorage.getItem('scoreRanking'));
-        for(let i = 0; i < localArray.length; i++)
-        {
-            var podiumElement = document.createElement("li");
-            podiumElement.textContent = localArray[i].name + ": " + localArray[i].score;
-            podiumElement.style.backgroundColor = "red";
-            podiumEl.appendChild(podiumElement);
+        if(localArray != null) {
+            for(let i = 0; i < localArray.length; i++)
+            {
+                var podiumElement = document.createElement("li");
+                podiumElement.textContent = localArray[i].name + ": " + localArray[i].score;
+                podiumElement.className = "ranking";
+                podiumEl.appendChild(podiumElement);
+            };
         };
-       
-        
-        
-        
-        
        
    }
 }
@@ -133,17 +132,20 @@ var answerCorrect = function(response){
 var endGame = function(){
     quizAreaEl.style.display = "none";
     endGameEl.style.display = "flex";
-    endMessageEl.innerHTML = "your final score is: " + (countDown - 1);
+    endMessageEl.innerHTML = "your final score is: " + (countDown);
 
 }
 
 var submitScore = function(event){
     event.preventDefault();
     if(event.target.matches("#sub-button")){
+        if(countDown === 0){
+            window.alert("you can't save a score of 0, get better")
+        }else{
         var intials = document.querySelector("input[name='intials']").value;
         var scoreCard = {
             name:intials,
-            score:countDown,
+            score:countDown+1,
         }
         if(localStorage.getItem('scoreRanking') === null){
             localStorage.setItem('scoreRanking', '[]');
@@ -156,11 +158,24 @@ var submitScore = function(event){
         
         localStorage.setItem('scoreRanking', JSON.stringify(tempArray));
         viewHighscores(event);
-        
+        };
     }
 }
+var goBack = function(){
+    location.reload()
+}
 
+var clearScore = function(){
+    if(window.confirm("are you sure you want to clear all highscores?")){
+        localStorage.removeItem('scoreRanking');
+        while(podiumEl.firstChild){
+            podiumEl.removeChild(podiumEl.firstChild);
+        }
+    }
+}
 introWrapperEl.addEventListener("click", startGame);
 navTimeEl.addEventListener("click", viewHighscores);
 quizAreaEl.addEventListener("click", submitAnswer);
 endGameEl.addEventListener("click",submitScore);
+goBackEl.addEventListener("click", goBack);
+clearScoreEl.addEventListener("click", clearScore);

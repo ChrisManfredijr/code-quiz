@@ -148,6 +148,8 @@
 .sub{
     height:30px;
     width:100px;
+    margin-right:3px;
+    margin-left: 0px;
 }
 
 /* highscores */
@@ -161,4 +163,21 @@
     width:50%;
     margin:0 auto;
 
+}
+
+.ranking{
+    font-size: 30px;
+    font-weight:bold;
+    font-style:italic;
+    color: var(--color1);
+    width:300px;
+    padding:5px;
+    border: solid 3px black;
+    background-color: rgba(255,0,0, .5);
+    border-radius:5%;
+}
+
+.clear{
+    height: 30px;
+    width:200px;
 }
