@@ -16,7 +16,6 @@ var highscoreToggle = 0;
 var scoreRanking = [];
 
 
-
 var viewHighscores = function(event){
 
    if(event.target.matches(".view-score")|| event.target.matches(".sub")){
@@ -26,6 +25,8 @@ var viewHighscores = function(event){
         highScoresEl.style.display = "flex";
 
         var localArray = JSON.parse(localStorage.getItem('scoreRanking'));
+        
+        //checks if local storage is empty before iterating for loop to prevent error
         if(localArray != null) {
             for(let i = 0; i < localArray.length; i++)
             {
@@ -38,7 +39,7 @@ var viewHighscores = function(event){
        
    }
 }
-
+//clears the screen to make room for highscore
 var clearScreen = function(){
     quizAreaEl.style.display = "none";
     endGameEl.style.display = "none";
@@ -47,6 +48,7 @@ var clearScreen = function(){
     quizQuestionEl.style.display = "none";
 }
 
+//runs the timer as soon as the game start
 var gameTimer = function(){
 
     var gameTimer = document.querySelector("#game-timer");
@@ -63,7 +65,7 @@ var gameTimer = function(){
         
     }, 1000);
 }
-
+//primer function to start the game
 var startGame = function(event) {
     event.preventDefault();
     var targetEl = event.target;
@@ -76,7 +78,7 @@ var startGame = function(event) {
    }
 
 
-
+//runs through this function every question until the game is over
 var playGame = function() {
     if(questionCount <= questionTotal) {
         var quizQuestionEl = document.querySelector("#question" + questionCount);
@@ -87,6 +89,7 @@ var playGame = function() {
 
 }
 
+//runs when an answer is clicked
 var submitAnswer = function(event){
     var targetEl = event.target;
     var quizQuestionEl = document.querySelector("#question" + questionCount);
@@ -111,6 +114,7 @@ var submitAnswer = function(event){
  
 }
 
+//gives feedback based on answer 
 var answerCorrect = function(response){
     var answerFeedbackEl = document.querySelector("#answer-feedback");
     var removeDisplay = function(){
@@ -129,6 +133,7 @@ var answerCorrect = function(response){
     }
 }
 
+//runs when the game is over, and shows core
 var endGame = function(){
     quizAreaEl.style.display = "none";
     endGameEl.style.display = "flex";
@@ -136,6 +141,7 @@ var endGame = function(){
 
 }
 
+//logs the score and name in local storage 
 var submitScore = function(event){
     event.preventDefault();
     if(event.target.matches("#sub-button")){
@@ -161,10 +167,12 @@ var submitScore = function(event){
         };
     }
 }
+//the go back function just reloads to page and brings you back to the start
 var goBack = function(){
     location.reload()
 }
 
+//clears out the local storage, removes any scores listed on the podium
 var clearScore = function(){
     if(window.confirm("are you sure you want to clear all highscores?")){
         localStorage.removeItem('scoreRanking');
@@ -173,6 +181,8 @@ var clearScore = function(){
         }
     }
 }
+
+//all event listeners
 introWrapperEl.addEventListener("click", startGame);
 navTimeEl.addEventListener("click", viewHighscores);
 quizAreaEl.addEventListener("click", submitAnswer);
