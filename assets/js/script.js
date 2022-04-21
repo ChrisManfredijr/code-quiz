@@ -7,14 +7,49 @@ var quizAreaEl = document.querySelector("#quiz-area");
 var quizQuestionEl = document.querySelector("#question"+ questionCount);
 var answerFeedbackEl = document.querySelector("#answer-feedback");
 var endGameEl = document.querySelector("#end-screen");
-var timer;
+var endMessageEl = document.querySelector("#end-message");
+var highScoresEl = document.querySelector("#high-scores");
+var podiumEl = document.querySelector("#podium");
+var highscoreToggle = 0;
+var scoreRanking = [];
+
 
 
 var viewHighscores = function(event){
-   
+   console.log("test-fire");
+   if(event.target.matches(".view-score")|| event.target.matches(".sub")){
+        //if the user tries to view highscores durring game, this will ensure the timer stops and does not go to endscreen
+        highscoreToggle++;
+        clearScreen();
+        highScoresEl.style.display = "flex";
+
+        var localArray = JSON.parse(localStorage.getItem('scoreRanking'));
+        for(let i = 0; i < localArray.length; i++)
+        {
+            var podiumElement = document.createElement("li");
+            podiumElement.textContent = localArray[i].name + ": " + localArray[i].score;
+            podiumElement.style.backgroundColor = "red";
+            podiumEl.appendChild(podiumElement);
+        };
+       
+        
+        
+        
+        
+       
+   }
+}
+
+var clearScreen = function(){
+    quizAreaEl.style.display = "none";
+    endGameEl.style.display = "none";
+    introWrapperEl.style.display = "none";
+    navTimeEl.style.display = "none";
+    quizQuestionEl.style.display = "none";
 }
 
 var gameTimer = function(){
+
     var gameTimer = document.querySelector("#game-timer");
     var timer = setInterval(function(){
         countDown--;
@@ -22,11 +57,11 @@ var gameTimer = function(){
             countDown = 0;
             clearInterval(timer);
             endGame();   
-        }else if(questionCount > questionTotal){
+        }else if(questionCount > questionTotal || highscoreToggle === 1){
             clearInterval(timer);
         }
         gameTimer.innerHTML = "Timer:" + countDown;
-        ;
+        
     }, 1000);
 }
 
@@ -96,11 +131,36 @@ var answerCorrect = function(response){
 }
 
 var endGame = function(){
-    clearInterval(timer);
     quizAreaEl.style.display = "none";
     endGameEl.style.display = "flex";
+    endMessageEl.innerHTML = "your final score is: " + (countDown - 1);
 
 }
+
+var submitScore = function(event){
+    event.preventDefault();
+    if(event.target.matches("#sub-button")){
+        var intials = document.querySelector("input[name='intials']").value;
+        var scoreCard = {
+            name:intials,
+            score:countDown,
+        }
+        if(localStorage.getItem('scoreRanking') === null){
+            localStorage.setItem('scoreRanking', '[]');
+        }
+        var tempArray = JSON.parse(localStorage.getItem('scoreRanking'));
+        tempArray.push(scoreCard);
+        tempArray.sort((a,b) => {
+            return b.score - a.score;
+        });
+        
+        localStorage.setItem('scoreRanking', JSON.stringify(tempArray));
+        viewHighscores(event);
+        
+    }
+}
+
 introWrapperEl.addEventListener("click", startGame);
 navTimeEl.addEventListener("click", viewHighscores);
 quizAreaEl.addEventListener("click", submitAnswer);
+endGameEl.addEventListener("click",submitScore);

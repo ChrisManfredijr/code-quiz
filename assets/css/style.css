@@ -149,3 +149,16 @@
     height:30px;
     width:100px;
 }
+
+/* highscores */
+
+.high-scores{
+    display:none;
+    justify-content:center;
+    align-items: flex-start;
+    flex-direction:column;
+    height:1000px;
+    width:50%;
+    margin:0 auto;
+
+}

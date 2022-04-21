@@ -9,7 +9,7 @@
 </head>
 <body class = "play-area" id="play-area">
     <header class = "nav-time" id="nav-time">
-        <nav>View Highscores</nav>
+        <nav class = "view-score">View Highscores</nav>
         <div id =game-timer>Timer:30</div>
     </header>
 
@@ -67,7 +67,7 @@
     </section>
     <section class = "end-screen" id = "end-screen">
         <h1>All done!</h1>
-        <p>your final score is:</p>
+        <p id = "end-message">your final score is:</p>
         <form class = submit-container id = "submit-container">
             <label for = "intials">Enter intials:</label>
             <input type="text" id="intials" name="intials" class="intials">
@@ -76,6 +76,11 @@
     </section>
     <div class = "answer-feedback" id = "answer-feedback">
         <p></p>
+    </div>
+    <div class= "high-scores" id="high-scores">
+        <h1>High Scores:</h1>
+        <ul id = "podium"></ul>
+        <input type="submit" value ="Go back" id="go-back" class="btn sub">
     </div>
     <script src="./assets/js/script.js"></script>
 </body>
